@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.DepartmentMapper">
+    <resultMap id="result" type="persistence.dto.DepartmentDTO">
+        <result property="departmentID" column="DepartmentID"/>
+        <result property="departmentName" column="DepartmentName"/>
+        <result property="deanID" column="DeanID"/>
+        <result property="departmentOffice" column="DepartmentOffice"/>
+    </resultMap><!--    데이터베이스 테이블의 컬럼 -> 자바 객체의 필드-->
+    <select id="selectAll" resultMap="result">
+        SELECT * FROM department
+    </select>
+</mapper>

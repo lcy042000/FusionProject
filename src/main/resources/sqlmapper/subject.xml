@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.SubjectMapper">
+    <resultMap id="result" type="persistence.dto.SubjectDTO">
+        <result property="id" column="subject_id"/>
+        <result property="subjectName" column="subject_name"/>
+        <result property="targetGrade" column="target_grade"/>
+        <result property="semester" column="semester"/>
+        <result property="credit" column="credit"/>
+    </resultMap>
+    <select id="selectAll" resultMap="result">
+        SELECT * FROM SUBJECTS
+    </select>
+
+    <select id="selectByGrade" resultMap="result">
+        SELECT * FROM SUBJECTS WHERE target_grade = #{grade}
+    </select>
+
+    <insert id="insertOneSubject">
+        INSERT INTO SUBJECTS (subject_name, target_grade, semester, credit)
+        VALUES (#{subjectName}, #{targetGrade}, #{semester}, #{credit})
+    </insert>
+
+    <update id="updateOneSubjectName">
+        UPDATE SUBJECTS SET subject_name = #{newSubjectName} WHERE subject_name = #{prevSubjectName}
+    </update>
+
+    <select id="selectBySubjectName" resultMap="result">
+        SELECT *
+        FROM SUBJECTS
+        WHERE subject_name = #{subjectName}
+    </select>
+
+    <!--S
+        <select id="findPostWithTitleLike" resultMap="result">
+            SELECT * FROM BOARD
+            WHERE hit=0
+            <if test="title!=null">
+                AND title like CONCAT('%', #{title}, '%')
+            </if>
+        </select>
+        <select id="findPostWithTitleNameLike"
+                resultMap="result">
+            SELECT * FROM BOARD
+            WHERE hit = 0
+            <if test="title != null">
+                AND title like CONCAT('%',#{title},'%')
+            </if>
+            <if test="writer != null">
+                AND writer like CONCAT('%',#{writer},'%')
+            </if>
+        </select>
+
+        <select id="findPostWithTitleNameLike2"
+                resultMap="result">
+            SELECT * FROM BOARD
+            WHERE hit = 0
+            <choose>
+                <when test="title != null">
+                    AND title like CONCAT('%',#{title},'%')
+                </when>
+                <when test="writer != null">
+                    AND writer like CONCAT('%',#{writer},'%')
+                </when>
+                <otherwise>
+                </otherwise>
+            </choose>
+        </select>
+
+        <select id="selectWithTrim" resultMap="result">
+            SELECT * FROM BOARD WHERE board_id = #{id}
+            <trim prefix="AND (" prefixOverrides="OR" suffix=")">
+                <if test="title != null">
+                    OR title = #{title}
+                </if>
+                <if test="writer != null">
+                    OR writer = #{writer}
+                </if>
+            </trim>
+        </select>
+
+        <insert id="insertPostOne">
+            INSERT INTO BOARD (title, writer, content, regDate, hit)
+            VALUES (#{title}, #{writer}, #{content}, #{regDate}, #{hit})
+        </insert>
+
+        <update id="updatePostWithBoardId">
+            UPDATE BOARD SET title = #{title}, content = #{content} WHERE board_id = #{id}
+        </update>
+
+        <delete id="deletePost">
+            DELETE FROM BOARD WHERE board_id = #{id}
+        </delete>
+    -->
+
+</mapper>
